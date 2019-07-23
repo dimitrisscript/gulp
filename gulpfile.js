@@ -5,6 +5,8 @@ var uglify = require('gulp-terser');
 var cleanCSS = require('gulp-clean-css');
 var order = require("gulp-order");
 
+const image = require('gulp-image');
+
 
 
 function scripts() {
@@ -41,4 +43,10 @@ function css() {
 		.pipe(gulp.dest('dist'))
 };
 
-exports.default = parallel(scripts, css);
+function img() {
+	return gulp.src('src/img/*')
+		.pipe(image())
+		.pipe(gulp.dest('./dist'));
+}
+
+exports.default = parallel(scripts, css, img);
